@@ -19,4 +19,12 @@ A high-performance, distraction-free app for reading guitar chords and tabs duri
 -   **Offline Support**: Once a song is loaded, it's ready for the stage even without internet.
 
 ---
+
+## 🤝 Credits & Acknowledgements
+
+This project is a modified version ("Sonrise Edition") of the original open-source **UltimateTab** project. Special thanks to the original creators for providing such a robust foundation for musicians everywhere.
+
+*Original project: [UltimateTab](https://github.com/v-v-v/UltimateTab)*
+
+---
 *Created for musicians who just want to play.*
