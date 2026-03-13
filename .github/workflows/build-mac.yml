@@ -1,0 +1,41 @@
+name: Build Mac App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-tauri:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Frontend Dependencies
+        run: npm install
+
+      - name: Build Tauri App (Mac)
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          target: aarch64-apple-darwin
+          # This creates a universal binary or specific binary, let's keep it default which targets the runner's architecture (x86_64 or aarch64 depending on macos-latest runner used)
+
+      # The tauri-action automatically uploads artifacts to a GitHub Release if tagged, but we can also manually upload the artifacts so they appear in the Actions tab.
+      - name: Upload Mac Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: UltimateTab-Mac
+          path: src-tauri/target/release/bundle/dmg/*.dmg
