@@ -62,7 +62,7 @@ export default function SetlistSidebar() {
     setIsSimplified(item.isSimplified || false)
     setUserKey(item.userKey || null)
     // Navigate to the tab
-    router.push(`/tab/${item.tab.slug}`)
+    router.push(`/tab?slug=${item.tab.slug}`)
   }
 
   const handleImportClick = () => {
