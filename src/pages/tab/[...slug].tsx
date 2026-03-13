@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
-import TabPanel from '../components/TabPanel'
+import TabPanel from '../../components/TabPanel'
 import Head from 'next/head'
-import useAppStateContext from '../hooks/useAppStateContext'
-import { Tab } from '../types/tabs'
+import useAppStateContext from '../../hooks/useAppStateContext'
+import { Tab } from '../../types/tabs'
 import { useRouter } from 'next/router'
 import { Fade, useToast } from '@chakra-ui/react'
 
 export default function TabPage(): JSX.Element {
   const router = useRouter()
-  // Use query parameter 'slug' instead of dynamic route slug
-  const slug = router.query.slug as string
+  const slug = Array.isArray(router.query.slug)
+    ? router.query.slug.join('/')
+    : router.query.slug
 
   const {
     favorites,
